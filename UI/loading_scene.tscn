@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bf4tvbb4hk4yy"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[b][color=#2aa9ff][center]QUICK RULES[/center][/color][/b]
+
+[table=3]
+
+[cell]
+[img]res://icons/deal.png[/img]
+[b][color=#ffcc33]Setup[/color][/b]
+Deal 4 each.  
+4 cards on table.
+[/cell]
+
+[cell]
+[img]res://icons/capture.png[/img]
+[b][color=#ffcc33]Capture[/color][/b]
+Match rank  
+or add to value.
+[/cell]
+
+[cell]
+[img]res://icons/build.png[/img]
+[b][color=#ffcc33]Build[/color][/b]
+Combine cards.  
+Must hold value.
+[/cell]
+
+[/table]
+
+[table=3]
+
+[cell]
+[img]res://icons/trail.png[/img]
+[b][color=#ffcc33]Trail[/color][/b]
+Only if no  
+capture/build.
+[/cell]
+
+[cell]
+[img]res://icons/sweep.png[/img]
+[b][color=#ffcc33]Sweep[/color][/b]
+Clear table =  
++1 point.
+[/cell]
+
+[cell]
+[img]res://icons/goal.png[/img]
+[b][color=#ff8844]Goal[/color][/b]
+First to  
+21 points.
+[/cell]
+
+[/table]
+"

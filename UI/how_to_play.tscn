@@ -1,0 +1,107 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5npuv78i2tkh"]
+
+[ext_resource type="Theme" uid="uid://ctuwl003uf0l7" path="res://UI/Theme/theme_base.theme" id="1_wp8x0"]
+
+[node name="HowToPlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg_container" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg_color_solid" type="ColorRect" parent="bg_container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.6901961, 1)
+
+[node name="margins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 100
+
+[node name="title" type="Label" parent="margins"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0.09411765, 0.22745098, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -10
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 135
+text = "Rules of \"Casino\""
+
+[node name="margin_lvl2" type="MarginContainer" parent="margins"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 105
+
+[node name="TabContainer" type="TabContainer" parent="margins/margin_lvl2"]
+layout_mode = 2
+theme = ExtResource("1_wp8x0")
+current_tab = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="margins/margin_lvl2/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 0
+
+[node name="Rules" type="RichTextLabel" parent="margins/margin_lvl2/TabContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_wp8x0")
+bbcode_enabled = true
+text = "[b][center]CASINO — QUICK RULES[/center][/b]
+
+[b]Setup[/b]
+• Deal 4 cards to each player.  
+• Place 4 cards face‑up on the table.  
+• After all 4 cards are played, deal 4 more each until the deck is gone.
+
+[b]Your Turn[/b]
+Play 1 card and choose:
+
+• [b]Capture[/b] — Take table cards that match your card’s rank or add up to it.  
+• [b]Build[/b] — Combine a table card with your card to form a value you plan to capture later (you must hold that value).  
+• [b]Trail[/b] — Place a card on the table only if you cannot capture or build.
+
+[b]Scoring[/b]
+• Most cards: 3 pts  
+• Most spades: 1 pt  
+• Each Ace: 1 pt  
+• 2♠ Big Casino: 2 pts  
+• 10♦ Little Casino"
+text_direction = 1
+
+[node name="play_button" type="Button" parent="margins"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("1_wp8x0")
+text = "Play"

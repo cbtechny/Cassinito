@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0e20jdck3tux"]
+
+[ext_resource type="Theme" uid="uid://ctuwl003uf0l7" path="res://UI/Theme/theme_base.theme" id="1_dl586"]
+[ext_resource type="Script" uid="uid://dq5ltmilcyyfq" path="res://UI/start_menu.gd" id="1_q5qyg"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q5qyg")
+
+[node name="bg_container" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg_color_solid" type="ColorRect" parent="bg_container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.6901961, 1)
+
+[node name="margins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 100
+
+[node name="title" type="Label" parent="margins"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0.09411765, 0.22745098, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -10
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 135
+text = "Cassino"
+
+[node name="button_container" type="VBoxContainer" parent="margins"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="play_button" type="Button" parent="margins/button_container"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("1_dl586")
+text = "Play"
+
+[node name="how_to_play_button" type="Button" parent="margins/button_container"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme = ExtResource("1_dl586")
+text = "How to Play"
+
+[connection signal="pressed" from="margins/button_container/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="margins/button_container/how_to_play_button" to="." method="_on_how_to_play_button_pressed"]

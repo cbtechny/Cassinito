@@ -1,0 +1,15 @@
+extends Control
+
+signal game_begin
+
+@onready var play_btn : Button = $margins/button_container/play_button
+@onready var how_to_play_btn : Button = $margins/button_container/how_to_play_button
+
+
+func _on_play_button_pressed() -> void:
+	emit_signal( "game_begin" )
+	pass # Replace with function body.
+
+
+func _on_how_to_play_button_pressed() -> void:
+	SceneManager.go_to_scene_id( 1 )
