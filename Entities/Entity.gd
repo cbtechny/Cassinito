@@ -9,11 +9,14 @@ var ace_count : int = 0
 var swipe_count : int = 0
 var card_pile_counter : int = 0
 
+func _init( _name : String, is_player : bool):
+	player_name = _name
+	is_enity_player = is_player
+	
 class Player extends Entity:
-	func _init() -> void:
-		player_name = "Player"
-		is_enity_player = true
+	func _init():
+		super(  "Player", true )
 
 class CPU extends Entity:
-	func _init() -> void:
-		player_name = "Opponent"
+	func _init():
+		super( "Opponent", false )
