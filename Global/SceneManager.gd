@@ -22,13 +22,17 @@ const SCENE_PATHS := {
 var current_scene : Node = null
 
 func go_to_scene_id( id : int ) -> void:
+
 	if not SCENE_PATHS.has( id ):
 		push_error( "Invalid scene ID. Check Scene Manager." ) 
 		return
+
 	var path := SCENE_PATHS[ id ] as String
+
 	if path == "" or path == null:
-		push_error("Scene path is empty" )
+		push_error( "Scene path is empty" )
 		return
+		
 	load_scene(  SCENE_PATHS[ id ]  )
 
 func load_scene( path: String ) -> void:
