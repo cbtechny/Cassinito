@@ -31,12 +31,12 @@ func choose_ace_value( card_data : CardData, use_alt_value : bool ) -> int:
 		return ACE_ALT_VALUE
 	return 1
 
-func calc_captured_total_score() ->int:
+func calc_captured_total_score() -> int:
 	var score : int = 0
-# Each ace is a point
-	ace_count += 1
-# Each swipe card is a point
-	swipe_count += 1
+	# Each ace is a point
+	score += ace_count
+	# Each swipe card is a point
+	score += swipe_count
 # Check if the player has the most spades
 	if spade_count > 6:
 		score += 1
@@ -56,15 +56,21 @@ func add_card( new_card : CardData ) -> void:
 	if new_card.is_spade:
 		spade_count += 1
 	if new_card.suit == SUIT_DIAMOND and new_card.rank == RANK_TEN:
-		has_little_cassino = true
+		has_big_cassino = true  # 10 of Diamonds = Big Cassino (2 pts)
 	if new_card.suit == SUIT_SPADE and new_card.rank == RANK_TWO:
-		has_big_cassino = true
+		has_little_cassino = true  # 2 of Spades = Little Cassino (1 pt)
 	hand.cards.append( new_card )
-	
-class Player extends Entity:
-	func _init():
-		super(  "Player", true )
 
 class CPU extends Entity:
-	func _init():
+	
+	enum Difficulty{
+		EASY,
+		MEDIUM,
+		HARD
+	}
+
+	var difficulty_level : Difficulty = Difficulty.EASY
+
+	func _init( _difficulty : Difficulty ):
 		super( "Opponent", false )
+		difficulty_level = _difficulty
