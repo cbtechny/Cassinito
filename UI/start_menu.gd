@@ -7,9 +7,8 @@ signal game_begin
 
 
 func _on_play_button_pressed() -> void:
+	SceneManager.go_to_scene_id( 3 )
 	emit_signal( "game_begin" )
-	pass # Replace with function body.
-
 
 func _on_how_to_play_button_pressed() -> void:
 	SceneManager.go_to_scene_id( 1 )

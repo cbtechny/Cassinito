@@ -1,5 +1,4 @@
 class_name Cassino extends Node
 
-var dealer = null
-var deck = null
+var deck = Deck.new()
 var cards_dealt : int = 0
