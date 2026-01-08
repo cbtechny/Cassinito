@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvee27coa3uc3"]
+
+[ext_resource type="Texture2D" uid="uid://cryjrjiir4kfo" path="res://Game/Cards/Textures/card_back_black.tres" id="1_lcux3"]
+[ext_resource type="Texture2D" uid="uid://1mbv6ap5hy66" path="res://Game/Cards/Textures/sample_card_texture.tres" id="1_nugkl"]
+
+[node name="Card" type="Control"]
+layout_mode = 3
+anchor_left = 0.067
+anchor_top = 0.165
+anchor_right = 0.067
+anchor_bottom = 0.165
+offset_left = -128.64
+offset_top = -178.20001
+offset_right = -0.6399994
+offset_bottom = -0.2000122
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="card_back" type="Sprite2D" parent="."]
+texture = ExtResource("1_lcux3")
+centered = false
+
+[node name="card_face" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_nugkl")
+centered = false

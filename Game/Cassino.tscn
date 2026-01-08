@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://c7m8u3c8sc5mk"]
+[gd_scene load_steps=4 format=3 uid="uid://c7m8u3c8sc5mk"]
+
+[ext_resource type="PackedScene" uid="uid://dvee27coa3uc3" path="res://Game/Card.tscn" id="1_uiwff"]
+[ext_resource type="Texture2D" uid="uid://1mbv6ap5hy66" path="res://Game/Cards/Textures/sample_card_texture.tres" id="2_anwsk"]
+[ext_resource type="Texture2D" uid="uid://d4jfsmraldqje" path="res://Game/Cards/Textures/sample_card_texture_b.tres" id="3_j0kc1"]
 
 [node name="Cassino" type="Node2D"]
 
@@ -11,3 +15,34 @@ color = Color(1, 1, 0.6901961, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Card" parent="." instance=ExtResource("1_uiwff")]
+offset_left = 399.0
+offset_top = 478.0
+offset_right = 527.0
+offset_bottom = 656.0
+
+[node name="Card2" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.067
+anchor_top = 0.165
+anchor_right = 0.067
+anchor_bottom = 0.165
+offset_left = 991.0
+offset_top = 443.0
+offset_right = 1119.0
+offset_bottom = 621.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="card_back" type="Sprite2D" parent="Card2"]
+texture = ExtResource("2_anwsk")
+centered = false
+
+[node name="card_face" type="Sprite2D" parent="Card2"]
+texture = ExtResource("3_j0kc1")
+centered = false
