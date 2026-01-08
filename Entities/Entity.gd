@@ -50,7 +50,7 @@ func calc_captured_total_score() -> int:
 		score += 1
 	return score
 
-func add_card( new_card : CardData ) -> void:
+func capture_card( new_card : CardData ) -> void:
 	if new_card.is_ace:
 		ace_count += 1
 	if new_card.is_spade:
@@ -59,18 +59,27 @@ func add_card( new_card : CardData ) -> void:
 		has_big_cassino = true  # 10 of Diamonds = Big Cassino (2 pts)
 	if new_card.suit == SUIT_SPADE and new_card.rank == RANK_TWO:
 		has_little_cassino = true  # 2 of Spades = Little Cassino (1 pt)
-	hand.cards.append( new_card )
+	captured_cards_pile.append( new_card )
+
+func capture_pile_of_cards( pile_of_cards : Array[ CardData ] ) -> void:
+	for c in pile_of_cards:
+		capture_card( c )
 
 class CPU extends Entity:
 	
-	enum Difficulty{
-		EASY,
+	enum Difficulty {
+		
 		MEDIUM,
 		HARD
 	}
+	
+	var difficulty_level : Difficulty
+	
+	const DIFFICULTY = { 
+		"medium" : Difficulty.MEDIUM, 
+		"hard" : Difficulty.HARD 
+		}
 
-	var difficulty_level : Difficulty = Difficulty.EASY
-
-	func _init( _difficulty : Difficulty ):
+	func _init( _difficulty : String ):
 		super( "Opponent", false )
-		difficulty_level = _difficulty
+		difficulty_level = DIFFICULTY.get( _difficulty.to_lower(), Difficulty.MEDIUM )

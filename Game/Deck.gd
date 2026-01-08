@@ -57,6 +57,9 @@ func create_deck() -> void:
 			deck_card_pile.append( card_data ) # Each card created is dadded to the pile
 			shuffle_deck() # Efficient shuffle dor card data objects
 
+func map_card_texture_region( ) -> void:
+	pass
+
 func shuffle_deck() -> void:
 	deck_card_pile.shuffle()
 
