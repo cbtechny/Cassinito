@@ -51,7 +51,8 @@ func create_deck() -> void:
 				Rank.keys()[ rank ],
 				Suit.keys()[ suit ],
 				CARD_VALUES[ rank ],
-				rank == Rank.ACE
+				rank == Rank.ACE,
+				suit == Suit.SPADES
 				) # With each iteration, a new card data is created with rank, suit, value, and whether it is an Ace-rank card
 			deck_card_pile.append( card_data ) # Each card created is dadded to the pile
 			shuffle_deck() # Efficient shuffle dor card data objects
