@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvee27coa3uc3"]
 
-[ext_resource type="Texture2D" uid="uid://cryjrjiir4kfo" path="res://Game/Cards/Textures/card_back_black.tres" id="1_lcux3"]
 [ext_resource type="Texture2D" uid="uid://1mbv6ap5hy66" path="res://Game/Cards/Textures/sample_card_texture.tres" id="1_nugkl"]
+[ext_resource type="PackedScene" uid="uid://j0232bin8qce" path="res://Game/Cards/back_card_sprite.tscn" id="2_bemvl"]
 
 [node name="Card" type="Control"]
 layout_mode = 3
@@ -19,9 +19,8 @@ texture_filter = 6
 position = Vector2(-5, 6)
 texture = ExtResource("1_nugkl")
 
-[node name="card_back" type="Sprite2D" parent="txtr_container"]
-texture = ExtResource("1_lcux3")
-
 [node name="card_face" type="Sprite2D" parent="txtr_container"]
 texture_filter = 1
 texture = ExtResource("1_nugkl")
+
+[node name="BackCardSprite" parent="txtr_container" instance=ExtResource("2_bemvl")]

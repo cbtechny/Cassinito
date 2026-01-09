@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7m8u3c8sc5mk"]
 
-[ext_resource type="PackedScene" uid="uid://dvee27coa3uc3" path="res://Game/Card.tscn" id="1_uiwff"]
+[ext_resource type="PackedScene" uid="uid://dvee27coa3uc3" path="res://Game/Cards/Card.tscn" id="1_uiwff"]
 [ext_resource type="Texture2D" uid="uid://1mbv6ap5hy66" path="res://Game/Cards/Textures/sample_card_texture.tres" id="2_anwsk"]
 [ext_resource type="Texture2D" uid="uid://d4jfsmraldqje" path="res://Game/Cards/Textures/sample_card_texture_b.tres" id="3_j0kc1"]
 

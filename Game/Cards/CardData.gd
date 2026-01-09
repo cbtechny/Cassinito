@@ -5,19 +5,22 @@ var suit : String  # Card suit as string (e.g., "HEARTS", "SPADES")
 var value : int    # Numeric value for Royal Cassino  ( 1-13 )
 var is_ace : bool  # True if this is an Ace
 var is_spade : bool # True if this is a Spade
+var texture_map_region : Rect2
 
 func _init( 
 	_r := "",  # Rank (default empty)
 	_s := "",  # Suit (default empty)
 	_v := 0,   # Value (default 0)
 	_is_ace := false,  # Is ace flag (default false)
-	_is_spade := false
+	_is_spade := false,
+	_texture_map_region : Rect2 = Rect2( 0,0,0,0 )
 ): 
 	rank = _r
 	suit = _s
 	value = _v
 	is_ace = _is_ace
 	is_spade = _is_spade
+	texture_map_region = _texture_map_region
 	
 # Debug helper (uncomment for testing)
 # Returns a human-readable string representation of the card

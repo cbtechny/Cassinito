@@ -10,13 +10,15 @@ config_version=5
 
 [application]
 
-config/name="Casinito"
+config/name="Cassinito"
+config/description="Royal Casino, a classic card game."
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://tests/icon.svg"
 
 [autoload]
 
 SceneManager="*res://Global/SceneManager.gd"
+CardAssets="*res://Global/CardMill.gd"
 
 [display]
 

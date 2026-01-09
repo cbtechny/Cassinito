@@ -1,4 +1,5 @@
 class_name Deck # Creates a 52-card deck full of data card objects with rank, suit and value
+var card_assets = load( "res://Game/Cards/CardAssets.gd" )
 # Below, find enums and constants for deck creation
 # Re: Rank - standard 52-card deck ranks (enum)
 enum Rank {
@@ -42,6 +43,9 @@ const CARD_VALUES = {
 
 # Re: deck_card_pile - holds the card objects created by create_deck()
 var deck_card_pile : Array[ CardData ]
+# Re: width and length - used for mapping the region where the card's texture is located on the sprite sheet
+var card_width : int = card_assets.FACE_SPRITE_CARD_WIDTH
+var card_length : int = card_assets.FACE_SPRITE_CARD_LENGTH
 
 func create_deck() -> void:
 	deck_card_pile.clear() # Safety check - clears card pile in case there are any cards in the pile

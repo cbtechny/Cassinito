@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://j0232bin8qce"]
+
+[ext_resource type="Texture2D" uid="uid://bk343wpilxca4" path="res://Game/Cards/Textures/CardBacks.png" id="1_nslnj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq3ox"]
+atlas = ExtResource("1_nslnj")
+region = Rect2(0, 0, 128, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_647lk"]
+atlas = ExtResource("1_nslnj")
+region = Rect2(128, 0, 128, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1i54"]
+atlas = ExtResource("1_nslnj")
+region = Rect2(256, 0, 128, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr78x"]
+atlas = ExtResource("1_nslnj")
+region = Rect2(384, 0, 128, 178)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6vjic"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq3ox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_647lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1i54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr78x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BackCardSprite" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_6vjic")
+frame = 1

@@ -1,6 +1,7 @@
-class_name Cassino extends Node
+class_name Cassino 
+extends Node
 
-signal swipe( _player : Entity )
+signal swipe( )
 
 var deck = Deck.new()
 var cards_dealt : int = 0
