@@ -1,171 +1,45 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0e20jdck3tux"]
+[gd_scene load_steps=7 format=3 uid="uid://b0e20jdck3tux"]
 
 [ext_resource type="Theme" uid="uid://ctuwl003uf0l7" path="res://UI/Theme/theme_base.theme" id="1_dl586"]
 [ext_resource type="Script" uid="uid://dq5ltmilcyyfq" path="res://UI/start_menu.gd" id="1_q5qyg"]
 [ext_resource type="PackedScene" uid="uid://dvee27coa3uc3" path="res://Game/Card.tscn" id="3_f14c5"]
-[ext_resource type="Texture2D" uid="uid://1mbv6ap5hy66" path="res://Game/Cards/Textures/sample_card_texture.tres" id="4_neu3s"]
-[ext_resource type="Texture2D" uid="uid://d4jfsmraldqje" path="res://Game/Cards/Textures/sample_card_texture_b.tres" id="5_rcgl7"]
 
-[sub_resource type="Animation" id="Animation_neu3s"]
-resource_name = "start_game_1"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Card:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.61086524]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Card:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(773, 333), Vector2(1881.0002, -450)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LittleCasino:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -0.61086524]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("LittleCasino:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(940, 295), Vector2(115, -326)]
-}
-
-[sub_resource type="Animation" id="Animation_rcgl7"]
+[sub_resource type="Animation" id="Animation_j3hi8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Card:rotation")
+tracks/0/path = NodePath("Cards:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Card:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(773, 333)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LittleCasino:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("LittleCasino:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(940, 295)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("bg_container/bg_color_solid:self_modulate:v")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("margins:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(904, -236), Vector2(668, -285)]
 }
 
-[sub_resource type="Animation" id="Animation_yqwmv"]
-resource_name = "start_game_2"
-length = 0.1
+[sub_resource type="Animation" id="Animation_f14c5"]
+resource_name = "intro_drop"
+length = 0.3
+step = 0.016666668
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bg_container/bg_color_solid:self_modulate:v")
+tracks/0/path = NodePath("Cards:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 4.2870927),
-"update": 1,
-"values": [1.0, 10.075]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("margins:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0, 0)]
+"values": [Vector2(525, -217), Vector2(476, 288)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqwmv"]
 _data = {
-&"RESET": SubResource("Animation_rcgl7"),
-&"start_game_1": SubResource("Animation_neu3s"),
-&"start_game_2": SubResource("Animation_yqwmv")
+&"RESET": SubResource("Animation_j3hi8"),
+&"intro_drop": SubResource("Animation_f14c5")
 }
 
 [node name="StartMenu" type="Control"]
@@ -173,20 +47,18 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q5qyg")
+metadata/_edit_horizontal_guides_ = [699.0]
 
 [node name="bg_container" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -540.0
-offset_right = 960.0
-offset_bottom = 540.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -197,9 +69,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.35506994, 0.34658867, 0, 1)
+color = Color(0.03529412, 0.03137255, 0, 1)
 
 [node name="margins" type="MarginContainer" parent="."]
+top_level = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,7 +82,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_bottom = 10
 
 [node name="title" type="Label" parent="margins"]
 layout_mode = 2
@@ -221,64 +94,45 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/shadow_offset_x = -10
 theme_override_constants/shadow_offset_y = 6
 theme_override_constants/outline_size = 25
-theme_override_font_sizes/font_size = 135
+theme_override_font_sizes/font_size = 50
 text = "Cassino"
 
 [node name="button_container" type="VBoxContainer" parent="margins"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_constants/separation = 34
+theme_override_constants/separation = 5
 
 [node name="play_button" type="Button" parent="margins/button_container"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(20, 45)
 layout_mode = 2
 theme = ExtResource("1_dl586")
 text = "Play"
 
 [node name="how_to_play_button" type="Button" parent="margins/button_container"]
-custom_minimum_size = Vector2(300, 100)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 theme = ExtResource("1_dl586")
 text = "How to Play"
 
-[node name="Card" parent="." instance=ExtResource("3_f14c5")]
+[node name="Cards" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 1.1360835
-anchor_top = -0.19870368
-anchor_right = 1.1360835
-anchor_bottom = -0.19870368
-offset_left = -1408.2803
-offset_top = 547.6
-offset_right = -1408.2803
-offset_bottom = 547.6
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="LittleCasino" type="Control" parent="."]
-layout_mode = 1
-anchor_left = -0.45625
-anchor_top = -0.712037
-anchor_right = -0.45625
-anchor_bottom = -0.712037
-offset_left = 1816.0
-offset_top = 1064.0
-offset_right = 1944.0
-offset_bottom = 1241.9999
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 904.0
+offset_top = -236.0
+offset_right = 904.0
+offset_bottom = -236.0
 grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
-size_flags_horizontal = 4
-size_flags_vertical = 8
-metadata/_edit_use_anchors_ = true
 
-[node name="card_back" type="Sprite2D" parent="LittleCasino"]
-texture = ExtResource("4_neu3s")
-centered = false
+[node name="Card2" parent="Cards" instance=ExtResource("3_f14c5")]
+layout_mode = 0
+rotation = -0.2617994
 
-[node name="card_face" type="Sprite2D" parent="LittleCasino"]
-texture = ExtResource("5_rcgl7")
-centered = false
+[node name="Card3" parent="Cards" instance=ExtResource("3_f14c5")]
+layout_mode = 0
+rotation = 0.2617994
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -5,26 +5,23 @@
 
 [node name="Card" type="Control"]
 layout_mode = 3
-anchor_left = 0.067
-anchor_top = 0.165
-anchor_right = 0.067
-anchor_bottom = 0.165
-offset_left = -128.64
-offset_top = -178.20001
-offset_right = -0.6399994
-offset_bottom = -0.2000122
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
+anchors_preset = 0
+pivot_offset = Vector2(0, 89)
 size_flags_horizontal = 4
 size_flags_vertical = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="card_back" type="Sprite2D" parent="."]
-texture = ExtResource("1_lcux3")
-centered = false
+[node name="txtr_container" type="Node2D" parent="."]
 
-[node name="card_face" type="Sprite2D" parent="."]
+[node name="shadow" type="Sprite2D" parent="txtr_container"]
+self_modulate = Color(0.7262233, 3.465414e-06, 2.8878452e-07, 0.49803922)
+texture_filter = 6
+position = Vector2(-5, 6)
+texture = ExtResource("1_nugkl")
+
+[node name="card_back" type="Sprite2D" parent="txtr_container"]
+texture = ExtResource("1_lcux3")
+
+[node name="card_face" type="Sprite2D" parent="txtr_container"]
 texture_filter = 1
 texture = ExtResource("1_nugkl")
-centered = false
