@@ -22,15 +22,17 @@ func _ready() -> void:
 func setup_card(data : CardData, show_front : bool = true) -> void:
 	card_data = data
 	if data:
-		# Set the texture region for the face sprite
-		card_face.texture = load(CardAssets.FACES_TXR_PATH)
-		card_face.region_enabled = true
-		card_face.region_rect = data.texture_map_region
+		# Load the main texture
+		var main_texture = load(CardAssets.FACES_TXR_PATH)
 		
-		# Also set shadow texture region
-		shadow.texture = load(CardAssets.FACES_TXR_PATH)
-		shadow.region_enabled = true
-		shadow.region_rect = data.texture_map_region
+		# Create AtlasTexture to show only the region for this card
+		var atlas_texture = AtlasTexture.new()
+		atlas_texture.atlas = main_texture
+		atlas_texture.region = data.texture_map_region
+		
+		# Set the texture for face and shadow
+		card_face.texture = atlas_texture
+		shadow.texture = atlas_texture
 		
 		# Show/hide ace hint for ace cards
 		if data.is_ace:
