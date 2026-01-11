@@ -37,7 +37,7 @@ func flatten_cards( source : Array ) -> Array[ CardData ]:
 	return result
 
 
-func evaluate_card_values( cards: Array, use_ace_high := false ) -> int:
+func evaluate_card_values( cards : Array, use_ace_high := false ) -> int:
 # Calculate the total value of a hand of cards, considering Ace as high or low.
 	var total : int = 0
 # Flatten the input array to handle nested arrays of cards.
@@ -81,8 +81,8 @@ func capture_pile_of_cards( cards : Array ) -> void:
 func calc_captured_total_score() -> int:
 	var score : int = 0
 
-	var ace_count := count_cards( func( c ): return c.is_ace )
-	var spade_count := count_cards( func( c ): return c.is_spade )
+	var ace_count := count_cards( func( c ) : return c.is_ace )
+	var spade_count := count_cards( func( c ) : return c.is_spade )
 	var swipe_count := swipe_cards_pile.size()
 
 	score += ace_count
