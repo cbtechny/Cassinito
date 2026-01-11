@@ -1,12 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvee27coa3uc3"]
+[gd_scene load_steps=6 format=3 uid="uid://dvee27coa3uc3"]
 
 [ext_resource type="Texture2D" uid="uid://1mbv6ap5hy66" path="res://Game/Cards/Textures/sample_card_texture.tres" id="1_nugkl"]
 [ext_resource type="PackedScene" uid="uid://j0232bin8qce" path="res://Game/Cards/back_card_sprite.tscn" id="2_bemvl"]
 
+[sub_resource type="Animation" id="Animation_bemvl"]
+resource_name = "ace_hint_trans"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AceConfig/ace_hint_label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8666667, 1.5666667, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ddleq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AceConfig/ace_hint_label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8hogv"]
+_data = {
+&"RESET": SubResource("Animation_ddleq"),
+&"ace_hint_trans": SubResource("Animation_bemvl")
+}
+
 [node name="Card" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-pivot_offset = Vector2(0, 89)
+pivot_offset = Vector2(0, 81)
 size_flags_horizontal = 4
 size_flags_vertical = 8
 metadata/_edit_use_anchors_ = true
@@ -18,9 +56,42 @@ self_modulate = Color(0.7262233, 3.465414e-06, 2.8878452e-07, 0.49803922)
 texture_filter = 6
 position = Vector2(-5, 6)
 texture = ExtResource("1_nugkl")
+offset = Vector2(65, 0)
 
 [node name="card_face" type="Sprite2D" parent="txtr_container"]
 texture_filter = 1
 texture = ExtResource("1_nugkl")
+offset = Vector2(65, 0)
 
 [node name="BackCardSprite" parent="txtr_container" instance=ExtResource("2_bemvl")]
+visible = false
+offset = Vector2(65, 0)
+
+[node name="AceConfig" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 1.0
+offset_top = -89.0
+offset_right = 129.0
+offset_bottom = 89.0
+pivot_offset = Vector2(0, -89)
+
+[node name="ace_hint_label" type="Label" parent="AceConfig"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -11.0
+offset_top = -85.0
+offset_right = 132.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.8235294, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 30
+text = "Value:
+1 OR 14"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8hogv")
+}

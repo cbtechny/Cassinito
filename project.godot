@@ -22,8 +22,14 @@ CardAssets="*res://Global/CardMill.gd"
 
 [display]
 
+window/size/viewport_width=1536
+window/size/viewport_height=864
+window/size/initial_position_type=0
+window/size/resizable=false
 window/size/extend_to_title=true
-window/stretch/mode="canvas_items"
+window/size/sharp_corners=true
+window/size/maximize_disabled=true
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [rendering]

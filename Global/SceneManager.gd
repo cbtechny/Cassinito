@@ -1,17 +1,16 @@
 extends Node
 
+# Enum for scene IDs
 enum ScenesList {
-	
 	MAIN_MENU,
 	HOW_TO,
 	LOAD_SCREEN,
 	CASSINO,
 	GAME_OVER
-	
 }
 
+# Dictionary mapping scene IDs to their paths
 const SCENE_PATHS := {
-	
 	ScenesList.MAIN_MENU : "res://UI/start_menu.tscn",
 	ScenesList.LOAD_SCREEN : "res://UI/loading_scene.tscn",
 	ScenesList.HOW_TO : "res://UI/how_to_play.tscn",
@@ -19,32 +18,36 @@ const SCENE_PATHS := {
 	ScenesList.GAME_OVER : ""
 }
 
-var current_scene : Node = null
+# Store the current scene
+var current_scene: Node = null
 
+# Switch to a scene by its ID
 func go_to_scene_id( id : int ) -> void:
-
+# Check if the ID is valid
 	if not SCENE_PATHS.has( id ):
-		push_error( "Invalid scene ID. Check Scene Manager." ) 
+		push_error( "Invalid scene ID. Check Scene Manager." )
 		return
 
-	var path := SCENE_PATHS[ id ] as String
-
-	if path == "" or path == null:
+# Get the scene path
+	var path := SCENE_PATHS[id] as String
+	if path.is_empty():
 		push_error( "Scene path is empty" )
 		return
-		
-	load_scene(  SCENE_PATHS[ id ]  )
 
-func load_scene( path: String ) -> void:
+# Load the scene
+	load_scene( path )
 
-	var packed_scene := load( path ) as PackedScene
-
-	if packed_scene == null:
-		push_error( "Scene Manager failed to load scene." )
+# Load a scene from a given path
+func load_scene( path : String ) -> void:
+	# Load the scene
+	var packed_scene := load( path )
+	if not packed_scene is PackedScene:
+		push_error( "Failed to load scene: " + path )
 		return
 
+ # Free/delete the current scene if it exists
 	if current_scene:
-		current_scene.queue_free()
+		current_scene.free()
 
+# Switch to the new scene
 	get_tree().change_scene_to_packed( packed_scene )
-	current_scene = get_tree().current_scene

@@ -1,48 +1,362 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7m8u3c8sc5mk"]
+[gd_scene load_steps=6 format=3 uid="uid://c7m8u3c8sc5mk"]
 
-[ext_resource type="PackedScene" uid="uid://dvee27coa3uc3" path="res://Game/Cards/Card.tscn" id="1_uiwff"]
-[ext_resource type="Texture2D" uid="uid://1mbv6ap5hy66" path="res://Game/Cards/Textures/sample_card_texture.tres" id="2_anwsk"]
-[ext_resource type="Texture2D" uid="uid://d4jfsmraldqje" path="res://Game/Cards/Textures/sample_card_texture_b.tres" id="3_j0kc1"]
+[ext_resource type="Texture2D" uid="uid://bgwygnj3c7okd" path="res://UI/red-felt.png" id="1_uiwff"]
+[ext_resource type="Theme" uid="uid://ctuwl003uf0l7" path="res://UI/Theme/theme_base.theme" id="2_wk5rl"]
+[ext_resource type="PackedScene" uid="uid://dvee27coa3uc3" path="res://Game/Cards/Card.tscn" id="3_anwsk"]
 
-[node name="Cassino" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_anwsk"]
+font_size = 70
+outline_size = 22
+outline_color = Color(1, 0, 0.3137255, 1)
+stacked_shadow_count = 2
+stacked_shadow_0/offset = Vector2(-7, 11)
+stacked_shadow_0/outline_size = 15
+stacked_shadow_1/offset = Vector2(-10, 10)
+stacked_shadow_1/color = Color(0.99607843, 0.99607843, 0.003921569, 0.25882354)
+stacked_shadow_1/outline_size = 15
 
-[node name="bg_solid_color" type="ColorRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
-size_flags_horizontal = 4
+[sub_resource type="LabelSettings" id="LabelSettings_j0kc1"]
+font_size = 40
+
+[node name="Cassino" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_horizontal_guides_ = [288.0, 599.0]
+
+[node name="GameArea" type="Control" parent="."]
+custom_minimum_size = Vector2(1536, 864)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1536.0
+offset_bottom = 864.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Table" type="TextureRect" parent="GameArea"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24900001
+anchor_top = 0.156
+anchor_right = 0.24900001
+anchor_bottom = 0.156
+offset_left = -1257.928
+offset_top = -335.568
+offset_right = 1242.072
+offset_bottom = 664.432
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_uiwff")
+
+[node name="PlayersMargin" type="MarginContainer" parent="GameArea"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 170
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Players" type="VSplitContainer" parent="GameArea/PlayersMargin"]
+layout_mode = 2
+dragging_enabled = false
+drag_area_offset = 200
+drag_area_highlight_in_editor = true
+
+[node name="Opponent" type="HBoxContainer" parent="GameArea/PlayersMargin/Players"]
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
-color = Color(1, 1, 0.6901961, 1)
-metadata/_edit_use_anchors_ = true
+
+[node name="Player" type="Control" parent="GameArea/PlayersMargin/Players/Opponent"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="player_planel" type="Panel" parent="GameArea/PlayersMargin/Players/Opponent/Player"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -258.0
+offset_right = 140.0
+grow_vertical = 0
+
+[node name="vbox" type="VBoxContainer" parent="GameArea/PlayersMargin/Players/Opponent/Player/player_planel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.5
+offset_top = -126.0
+offset_right = 60.5
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player_label" type="Label" parent="GameArea/PlayersMargin/Players/Opponent/Player/player_planel/vbox"]
+layout_mode = 2
+theme = ExtResource("2_wk5rl")
+theme_override_font_sizes/font_size = 30
+text = "Player"
+
+[node name="ColorRect" type="ColorRect" parent="GameArea/PlayersMargin/Players/Opponent/Player/player_planel/vbox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="cards" type="RichTextLabel" parent="GameArea/PlayersMargin/Players/Opponent/Player/player_planel/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "
+Captured----
+
+Swipes--------
+
+Hand----------"
+tab_size = 7
+
+[node name="captured_amount_label" type="Label" parent="GameArea/PlayersMargin/Players/Opponent/Player/player_planel/vbox/cards"]
+layout_mode = 0
+offset_left = 93.5
+offset_top = 24.0
+offset_right = 133.5
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="swipe_amount_label" type="Label" parent="GameArea/PlayersMargin/Players/Opponent/Player/player_planel/vbox/cards"]
+layout_mode = 0
+offset_left = 93.5
+offset_top = 66.0
+offset_right = 133.5
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="hand_remain_label" type="Label" parent="GameArea/PlayersMargin/Players/Opponent/Player/player_planel/vbox/cards"]
+layout_mode = 0
+offset_left = 93.5
+offset_top = 108.0
+offset_right = 133.5
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="card_box" type="HBoxContainer" parent="GameArea/PlayersMargin/Players/Opponent/Player"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = -1.5500001
+anchor_right = 1.0
+anchor_bottom = -1.5500001
+offset_right = 1286.0
+offset_bottom = 250.0
+theme_override_constants/separation = 200
+
+[node name="Card6" parent="GameArea/PlayersMargin/Players/Opponent/Player/card_box" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Card2" parent="GameArea/PlayersMargin/Players/Opponent/Player/card_box" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Card7" parent="GameArea/PlayersMargin/Players/Opponent/Player/card_box" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Card3" parent="GameArea/PlayersMargin/Players/Opponent/Player/card_box" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Player" type="HBoxContainer" parent="GameArea/PlayersMargin/Players"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Player" type="Control" parent="GameArea/PlayersMargin/Players/Player"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="player_planel" type="Panel" parent="GameArea/PlayersMargin/Players/Player/Player"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -258.0
+offset_right = 140.0
+grow_vertical = 0
+
+[node name="vbox" type="VBoxContainer" parent="GameArea/PlayersMargin/Players/Player/Player/player_planel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.5
+offset_top = -126.0
+offset_right = 60.5
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player_label" type="Label" parent="GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox"]
+layout_mode = 2
+theme = ExtResource("2_wk5rl")
+theme_override_font_sizes/font_size = 30
+text = "Player"
+
+[node name="ColorRect" type="ColorRect" parent="GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="cards" type="RichTextLabel" parent="GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "
+Captured----
+
+Swipes--------
+
+Hand----------"
+tab_size = 7
+
+[node name="captured_amount_label" type="Label" parent="GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox/cards"]
+layout_mode = 0
+offset_left = 93.5
+offset_top = 24.0
+offset_right = 133.5
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="swipe_amount_label" type="Label" parent="GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox/cards"]
+layout_mode = 0
+offset_left = 93.5
+offset_top = 66.0
+offset_right = 133.5
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="hand_remain_label" type="Label" parent="GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox/cards"]
+layout_mode = 0
+offset_left = 93.5
+offset_top = 108.0
+offset_right = 133.5
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="card_box" type="HBoxContainer" parent="GameArea/PlayersMargin/Players/Player/Player"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = -1.5500001
+anchor_right = 1.0
+anchor_bottom = -1.5500001
+offset_right = 1286.0
+offset_bottom = 250.0
+theme_override_constants/separation = 200
+
+[node name="Card6" parent="GameArea/PlayersMargin/Players/Player/Player/card_box" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Card2" parent="GameArea/PlayersMargin/Players/Player/Player/card_box" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Card7" parent="GameArea/PlayersMargin/Players/Player/Player/card_box" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Card3" parent="GameArea/PlayersMargin/Players/Player/Player/card_box" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Card" parent="." instance=ExtResource("1_uiwff")]
-offset_left = 399.0
-offset_top = 478.0
-offset_right = 527.0
-offset_bottom = 656.0
+[node name="TableCards" type="HBoxContainer" parent="UI"]
+offset_left = 108.0
+offset_top = 429.0
+offset_right = 708.0
+offset_bottom = 429.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 200
+alignment = 2
 
-[node name="Card2" type="Control" parent="."]
-layout_mode = 3
-anchor_left = 0.067
-anchor_top = 0.165
-anchor_right = 0.067
-anchor_bottom = 0.165
-offset_left = 991.0
-offset_top = 443.0
-offset_right = 1119.0
-offset_bottom = 621.0
-grow_horizontal = 2
+[node name="Card7" parent="UI/TableCards" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+
+[node name="Card8" parent="UI/TableCards" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+
+[node name="Card3" parent="UI/TableCards" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+
+[node name="Card4" parent="UI/TableCards" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+
+[node name="Card5" parent="UI/TableCards" instance=ExtResource("3_anwsk")]
+layout_mode = 2
+
+[node name="UIBOUNDS" type="MarginContainer" parent="UI"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -490.0
+grow_horizontal = 0
 grow_vertical = 2
-scale = Vector2(2, 2)
-size_flags_horizontal = 4
 size_flags_vertical = 8
-metadata/_edit_use_anchors_ = true
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
 
-[node name="card_back" type="Sprite2D" parent="Card2"]
-texture = ExtResource("2_anwsk")
-centered = false
+[node name="HBoxContainer" type="VBoxContainer" parent="UI/UIBOUNDS"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 8
+alignment = 2
 
-[node name="card_face" type="Sprite2D" parent="Card2"]
-texture = ExtResource("3_j0kc1")
-centered = false
+[node name="cassino_label" type="Label" parent="UI/UIBOUNDS/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Cassino"
+label_settings = SubResource("LabelSettings_anwsk")
+horizontal_alignment = 2
+
+[node name="cassino_label2" type="Label" parent="UI/UIBOUNDS/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.23137255)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Ninja Pirate Robot Alien"
+label_settings = SubResource("LabelSettings_j0kc1")

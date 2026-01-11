@@ -39,6 +39,6 @@ animations = [{
 }]
 
 [node name="BackCardSprite" type="AnimatedSprite2D"]
+self_modulate = Color(9.027417, 7.9082565, 7.9082565, 1)
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_6vjic")
-frame = 1

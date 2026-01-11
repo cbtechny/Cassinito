@@ -1,8 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0e20jdck3tux"]
+[gd_scene load_steps=8 format=3 uid="uid://b0e20jdck3tux"]
 
 [ext_resource type="Theme" uid="uid://ctuwl003uf0l7" path="res://UI/Theme/theme_base.theme" id="1_dl586"]
 [ext_resource type="Script" uid="uid://dq5ltmilcyyfq" path="res://UI/start_menu.gd" id="1_q5qyg"]
 [ext_resource type="PackedScene" uid="uid://dvee27coa3uc3" path="res://Game/Cards/Card.tscn" id="3_f14c5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f14c5"]
+font_size = 70
+font_color = Color(1, 0.09411765, 0.22745098, 1)
+outline_size = 8
+stacked_outline_count = 3
+stacked_outline_0/size = 10
+stacked_outline_1/size = 20
+stacked_outline_1/color = Color(0.91764706, 0, 0, 1)
+stacked_outline_2/size = 20
+stacked_outline_2/color = Color(1, 1, 1, 0.34509805)
 
 [sub_resource type="Animation" id="Animation_j3hi8"]
 length = 0.001
@@ -30,10 +41,10 @@ tracks/0/path = NodePath("Cards:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2988518, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(525, -217), Vector2(476, 288)]
+"values": [Vector2(780, -226), Vector2(772, 568), Vector2(765, 571)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqwmv"]
@@ -47,8 +58,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1152.0
-offset_bottom = -648.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q5qyg")
@@ -74,15 +83,18 @@ color = Color(0.03529412, 0.03137255, 0, 1)
 [node name="margins" type="MarginContainer" parent="."]
 top_level = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -115.0
+offset_right = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_bottom = 50
 
 [node name="title" type="Label" parent="margins"]
 layout_mode = 2
@@ -96,6 +108,7 @@ theme_override_constants/shadow_offset_y = 6
 theme_override_constants/outline_size = 25
 theme_override_font_sizes/font_size = 50
 text = "Cassino"
+label_settings = SubResource("LabelSettings_f14c5")
 
 [node name="button_container" type="VBoxContainer" parent="margins"]
 layout_mode = 2
@@ -117,21 +130,38 @@ text = "How to Play"
 
 [node name="Cards" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = 904.0
-offset_top = -236.0
-offset_right = 904.0
-offset_bottom = -236.0
+anchor_bottom = 0.5
+offset_left = 136.0
+offset_top = -668.0
+offset_right = 136.0
+offset_bottom = -668.0
 grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Card2" parent="Cards" instance=ExtResource("3_f14c5")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 rotation = -0.2617994
 
 [node name="Card3" parent="Cards" instance=ExtResource("3_f14c5")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 0.2617994
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
