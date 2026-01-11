@@ -8,6 +8,7 @@ signal swipe() # already declared, reuse
 @onready var cpu_hand_box    : HBoxContainer = $GameArea/PlayersMargin/Players/Opponent/Player/card_box
 @onready var table_box       : HBoxContainer = $UI/TableCards
 @onready var deck_position   : Node2D = $UI/DeckPosition
+@onready var play_card_button : Button = $UI/UIBOUNDS/HBoxContainer/PlayCardButton
 
 @onready var player_captured_label : Label = $GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox/cards/captured_amount_label
 @onready var player_swipe_label    : Label = $GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox/cards/swipe_amount_label
@@ -40,6 +41,8 @@ var selected_table_cards : Array[CardData] = []
 
 func _ready() -> void:
 	CardScene = load(CARD_SCENE_PATH)
+	# Connect button
+	play_card_button.pressed.connect(_on_confirm_move_pressed)
 	_init_game()
 
 func _init_game() -> void:
@@ -242,8 +245,24 @@ func _toggle_table_selection(card : CardData, node : Control) -> void:
 	_highlight_selection()
 
 func _highlight_selection() -> void:
-	# TODO: add/remove modulate or outline on selected nodes.
-	pass
+	# Reset all card modulations first
+	for card_data in card_to_node.keys():
+		var node = card_to_node[card_data]
+		if node:
+			node.modulate = Color(1, 1, 1, 1)  # Normal color
+	
+	# Highlight selected hand card
+	if selected_hand_card and card_to_node.has(selected_hand_card):
+		var node = card_to_node[selected_hand_card]
+		if node:
+			node.modulate = Color(1, 1, 0.5, 1)  # Yellow tint
+	
+	# Highlight selected table cards
+	for card_data in selected_table_cards:
+		if card_to_node.has(card_data):
+			var node = card_to_node[card_data]
+			if node:
+				node.modulate = Color(0.5, 1, 0.5, 1)  # Green tint
 
 # Called from a "Play" button in the UI or double‑click, etc.
 func _on_confirm_move_pressed() -> void:

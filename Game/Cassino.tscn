@@ -363,3 +363,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Ninja Pirate Robot Alien"
 label_settings = SubResource("LabelSettings_j0kc1")
+horizontal_alignment = 2
+
+[node name="Spacer" type="Control" parent="UI/UIBOUNDS/HBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="PlayCardButton" type="Button" parent="UI/UIBOUNDS/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_wk5rl")
+theme_override_font_sizes/font_size = 30
+text = "Play Card"
