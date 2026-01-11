@@ -328,6 +328,9 @@ layout_mode = 2
 [node name="Card5" parent="UI/TableCards" instance=ExtResource("3_anwsk")]
 layout_mode = 2
 
+[node name="DeckPosition" type="Node2D" parent="UI"]
+position = Vector2(1350, 429)
+
 [node name="UIBOUNDS" type="MarginContainer" parent="UI"]
 anchors_preset = 11
 anchor_left = 1.0
