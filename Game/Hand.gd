@@ -1,3 +1,4 @@
+# # # Hand - keeps track of player's cards and signals when their hand is empty
 class_name Hand
 # This class manages the player's hand of cards in the game and keeps track of the number of cards held. Main signal: hand_empty - emitted when the player's hand is empty.
 signal hand_empty
@@ -25,8 +26,6 @@ func remove_card_from_hand( card_object : CardData ) -> void:
 		if card_count == 0:
 			emit_signal( "hand_empty" )
 
-
-
 # Debug
 #func get_card_value( card_object : CardData) -> int:
 	#var card_rank_value : int = 0
@@ -35,5 +34,3 @@ func remove_card_from_hand( card_object : CardData ) -> void:
 	#else:
 		#card_object.value = card_rank_value
 	#return card_rank_value
-		
-	
