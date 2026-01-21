@@ -101,6 +101,9 @@ func _spawn_hand_card(e : Entity, card_data : CardData) -> void:
 	var card_node : Control = CardScene.instantiate()
 	# TODO: set card_node's texture region from card_data.texture_map_region
 	# and flip for CPU if desired (show back).
+	if card_node.has_method("setup"):
+		card_node.setup(card_data)
+
 	card_to_node[card_data] = card_node
 	node_to_card[card_node] = card_data
 
@@ -109,12 +112,16 @@ func _spawn_hand_card(e : Entity, card_data : CardData) -> void:
 		# connect click for player
 		card_node.gui_input.connect(_on_player_hand_card_input.bind(card_node))
 	else:
+		if card_node.has_method("set_face_up"):
+			card_node.set_face_up(false)
 		cpu_hand_box.add_child(card_node) # likely face‑down, no click
 
 	_refresh_hand_labels()
 
 func _spawn_table_card(card_data : CardData) -> void:
 	var card_node : Control = CardScene.instantiate()
+	if card_node.has_method("setup"):
+		card_node.setup(card_data)
 	card_to_node[card_data] = card_node
 	node_to_card[card_node] = card_data
 	table_box.add_child(card_node)
