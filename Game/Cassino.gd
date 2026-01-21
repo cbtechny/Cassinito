@@ -57,6 +57,12 @@ func _init_game() -> void:
 	state = TurnState.PLAYER_TURN
 	_refresh_all_ui()
 
+
+func _free_children(node: Node) -> void:
+	for i in range(node.get_child_count()):
+		node.get_child(i).queue_free()
+
+
 # --- Dealing ---
 
 func _deal_initial() -> void:
@@ -83,12 +89,9 @@ func _deal_cards_to_table(count : int) -> void:
 		_spawn_table_card(card_data)
 
 func _clear_all_visuals() -> void:
-	for c in player_hand_box.get_children():
-		c.queue_free()
-	for c in cpu_hand_box.get_children():
-		c.queue_free()
-	for c in table_box.get_children():
-		c.queue_free()
+	_free_children(player_hand_box)
+	_free_children(cpu_hand_box)
+	_free_children(table_box)
 	card_to_node.clear()
 	node_to_card.clear()
 
