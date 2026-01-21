@@ -67,6 +67,16 @@ offset = Vector2(65, 0)
 visible = false
 offset = Vector2(65, 0)
 
+[node name="SelectionOverlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_left = 1.0
+offset_top = -89.0
+offset_right = 129.0
+offset_bottom = 89.0
+color = Color(1, 1, 0, 0.392157)
+
 [node name="AceConfig" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 0

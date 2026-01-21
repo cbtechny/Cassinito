@@ -151,8 +151,29 @@ func _toggle_table_selection(card : CardData, node : Control) -> void:
 	_highlight_selection()
 
 func _highlight_selection() -> void:
-	# TODO: add/remove modulate or outline on selected nodes.
-	pass
+	# Deselect all cards first
+	for card_data in card_to_node:
+		var node = card_to_node[card_data]
+		if node:
+			var overlay = node.get_node_or_null("SelectionOverlay")
+			if overlay:
+				overlay.visible = false
+
+	# Highlight the hand card
+	if selected_hand_card:
+		var hand_node = card_to_node.get(selected_hand_card)
+		if hand_node:
+			var overlay = hand_node.get_node_or_null("SelectionOverlay")
+			if overlay:
+				overlay.visible = true
+
+	# Highlight table cards
+	for table_card in selected_table_cards:
+		var table_node = card_to_node.get(table_card)
+		if table_node:
+			var overlay = table_node.get_node_or_null("SelectionOverlay")
+			if overlay:
+				overlay.visible = true
 
 # Called from a "Play" button in the UI or double‑click, etc.
 func _on_confirm_move_pressed() -> void:
