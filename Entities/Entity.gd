@@ -334,7 +334,7 @@ class CPU extends Entity:
 
 # Executes a capture: removes card from hand, captures group from table.
 	func execute_capture( card : CardData, group : Array ) -> void:
-		hand.remove_card( card )
+		hand.remove_card_from_hand( card )
 
 		for c in flatten_cards( group ):
 			if table_cards.has( c ):
@@ -349,7 +349,7 @@ class CPU extends Entity:
 
 # Executes a build: removes card from hand, creates build structure on table.
 	func execute_build( card : CardData, group : Array ) -> void:
-		hand.remove_card( card )
+		hand.remove_card_from_hand( card )
 
 		for c in flatten_cards( group ):
 			if table_cards.has( c ):
@@ -360,7 +360,7 @@ class CPU extends Entity:
 
 # Executes a trail: plays card to table.
 	func execute_trail( card : CardData ) -> void:
-		hand.remove_card( card )
+		hand.remove_card_from_hand( card )
 		table_cards.append( card )
 
 	## Performs a full CPU turn: selects and executes the best move.

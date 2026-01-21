@@ -7,6 +7,8 @@ signal swipe() # already declared, reuse
 @onready var player_hand_box : HBoxContainer = $GameArea/PlayersMargin/Players/Player/Player/card_box
 @onready var cpu_hand_box    : HBoxContainer = $GameArea/PlayersMargin/Players/Opponent/Player/card_box
 @onready var table_box       : HBoxContainer = $UI/TableCards
+@onready var deck_position   : Node2D = $UI/DeckPosition
+@onready var play_card_button : Button = $UI/UIBOUNDS/HBoxContainer/PlayCardButton
 
 @onready var player_captured_label : Label = $GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox/cards/captured_amount_label
 @onready var player_swipe_label    : Label = $GameArea/PlayersMargin/Players/Player/Player/player_planel/vbox/cards/swipe_amount_label
@@ -39,6 +41,8 @@ var selected_table_cards : Array[CardData] = []
 
 func _ready() -> void:
 	CardScene = load(CARD_SCENE_PATH)
+	# Connect button
+	play_card_button.pressed.connect(_on_confirm_move_pressed)
 	_init_game()
 
 func _init_game() -> void:
@@ -53,18 +57,65 @@ func _init_game() -> void:
 	player.table_cards = table_cards
 	cpu.table_cards    = table_cards
 
-	_deal_initial()
-	state = TurnState.PLAYER_TURN
-	_refresh_all_ui()
+	_deal_initial_animated()
 
 # --- Dealing ---
 
 func _deal_initial() -> void:
-	# give 4 cards each and 4 to table
+	# Instant dealing (for re-deals during game)
 	_clear_all_visuals()
 	_deal_cards_to_entity(player, 4)
 	_deal_cards_to_entity(cpu, 4)
 	_deal_cards_to_table(4)
+
+# Animated dealing sequence at game start
+func _deal_initial_animated() -> void:
+	_clear_all_visuals()
+	state = TurnState.DEAL
+	
+	# Deal cards in sequence: player, bot, table pattern
+	# Player gets card 1, CPU gets card 1, Player gets card 2, CPU gets card 2, etc.
+	# Then 4 cards to table
+	var deal_sequence := []
+	
+	# Alternate dealing between player and CPU (4 cards each)
+	for i in range(4):
+		deal_sequence.append({"target": "player"})
+		deal_sequence.append({"target": "cpu"})
+	
+	# Then deal to table
+	for i in range(4):
+		deal_sequence.append({"target": "table"})
+	
+	await _execute_deal_sequence(deal_sequence)
+	
+	state = TurnState.PLAYER_TURN
+	_refresh_all_ui()
+
+# Execute the dealing sequence with animations
+func _execute_deal_sequence(sequence: Array) -> void:
+	const DEAL_DELAY := 0.2  # Delay between each card deal
+	
+	for deal_action in sequence:
+		if deck.deck_card_pile.is_empty():
+			break
+		
+		var card_data : CardData = deck.deck_card_pile.pop_back()
+		
+		match deal_action.target:
+			"player":
+				player.hand.add_card_to_hand(card_data)
+				await _spawn_and_animate_hand_card(player, card_data)
+			"cpu":
+				cpu.hand.add_card_to_hand(card_data)
+				await _spawn_and_animate_hand_card(cpu, card_data)
+			"table":
+				table_cards.append(card_data)
+				await _spawn_and_animate_table_card(card_data)
+		
+		await get_tree().create_timer(DEAL_DELAY).timeout
+	
+	_refresh_all_ui()
 
 func _deal_cards_to_entity(e : Entity, count : int) -> void:
 	for i in range(count):
@@ -94,27 +145,70 @@ func _clear_all_visuals() -> void:
 
 # --- Card instance helpers ---
 
-func _spawn_hand_card(e : Entity, card_data : CardData) -> void:
+# Spawn and animate a card being dealt to a hand
+func _spawn_and_animate_hand_card(e : Entity, card_data : CardData) -> void:
 	var card_node : Control = CardScene.instantiate()
-	# TODO: set card_node's texture region from card_data.texture_map_region
-	# and flip for CPU if desired (show back).
+	
+	# Store in mappings
+	card_to_node[card_data] = card_node
+	node_to_card[card_node] = card_data
+	
+	# Add to appropriate hand box
+	if e.is_entity_player:
+		player_hand_box.add_child(card_node)
+		# Player cards: start face-down, then flip
+		card_node.setup_card(card_data, false)
+		await get_tree().create_timer(0.1).timeout
+		card_node.flip_to_front()
+		# Connect click for player
+		card_node.gui_input.connect(_on_player_hand_card_input.bind(card_node))
+	else:
+		cpu_hand_box.add_child(card_node)
+		# CPU cards: stay face-down
+		card_node.setup_card(card_data, false)
+	
+	_refresh_hand_labels()
+
+# Spawn and animate a card being dealt to the table
+func _spawn_and_animate_table_card(card_data : CardData) -> void:
+	var card_node : Control = CardScene.instantiate()
+	
+	card_to_node[card_data] = card_node
+	node_to_card[card_node] = card_data
+	table_box.add_child(card_node)
+	
+	# Table cards: start face-down, then flip
+	card_node.setup_card(card_data, false)
+	await get_tree().create_timer(0.1).timeout
+	card_node.flip_to_front()
+	
+	# Allow player selecting table cards
+	card_node.gui_input.connect(_on_table_card_input.bind(card_node))
+
+func _spawn_hand_card(e : Entity, card_data : CardData) -> void:
+	# Instant spawn (no animation) for re-deals
+	var card_node : Control = CardScene.instantiate()
 	card_to_node[card_data] = card_node
 	node_to_card[card_node] = card_data
 
 	if e.is_entity_player:
 		player_hand_box.add_child(card_node)
+		card_node.setup_card(card_data, true)  # Player cards face-up
 		# connect click for player
 		card_node.gui_input.connect(_on_player_hand_card_input.bind(card_node))
 	else:
-		cpu_hand_box.add_child(card_node) # likely face‑down, no click
+		cpu_hand_box.add_child(card_node)
+		card_node.setup_card(card_data, false)  # CPU cards face-down
 
 	_refresh_hand_labels()
 
 func _spawn_table_card(card_data : CardData) -> void:
+	# Instant spawn (no animation)
 	var card_node : Control = CardScene.instantiate()
 	card_to_node[card_data] = card_node
 	node_to_card[card_node] = card_data
 	table_box.add_child(card_node)
+	card_node.setup_card(card_data, true)  # Table cards face-up
 	# Allow player selecting table cards
 	card_node.gui_input.connect(_on_table_card_input.bind(card_node))
 
@@ -151,8 +245,24 @@ func _toggle_table_selection(card : CardData, node : Control) -> void:
 	_highlight_selection()
 
 func _highlight_selection() -> void:
-	# TODO: add/remove modulate or outline on selected nodes.
-	pass
+	# Reset all card modulations first
+	for card_data in card_to_node.keys():
+		var node = card_to_node[card_data]
+		if node:
+			node.modulate = Color(1, 1, 1, 1)  # Normal color
+	
+	# Highlight selected hand card
+	if selected_hand_card and card_to_node.has(selected_hand_card):
+		var node = card_to_node[selected_hand_card]
+		if node:
+			node.modulate = Color(1, 1, 0.5, 1)  # Yellow tint
+	
+	# Highlight selected table cards
+	for card_data in selected_table_cards:
+		if card_to_node.has(card_data):
+			var node = card_to_node[card_data]
+			if node:
+				node.modulate = Color(0.5, 1, 0.5, 1)  # Green tint
 
 # Called from a "Play" button in the UI or double‑click, etc.
 func _on_confirm_move_pressed() -> void:
@@ -257,10 +367,9 @@ func _end_player_turn() -> void:
 	selected_table_cards.clear()
 	_highlight_selection()
 
-	# If both hands empty and deck has cards, deal next batch
+	# Check if need to deal more cards
 	if player.hand.card_count == 0 and cpu.hand.card_count == 0 and not deck.deck_card_pile.is_empty():
-		_deal_cards_to_entity(player, 4)
-		_deal_cards_to_entity(cpu, 4)
+		await _deal_next_round()
 		_refresh_all_ui()
 
 	# If deck empty and hands empty, round end
@@ -273,6 +382,14 @@ func _end_player_turn() -> void:
 	await get_tree().create_timer(0.5).timeout
 	_cpu_turn()
 
+# Deal next round of cards with animation
+func _deal_next_round() -> void:
+	var deal_sequence := []
+	for i in range(4):
+		deal_sequence.append({"target": "player"})
+		deal_sequence.append({"target": "cpu"})
+	await _execute_deal_sequence(deal_sequence)
+
 func _cpu_turn() -> void:
 	# CPU already has AI logic; just call play_turn.
 	cpu.play_turn()
@@ -281,8 +398,7 @@ func _cpu_turn() -> void:
 
 	# Same deal logic as player
 	if player.hand.card_count == 0 and cpu.hand.card_count == 0 and not deck.deck_card_pile.is_empty():
-		_deal_cards_to_entity(player, 4)
-		_deal_cards_to_entity(cpu, 4)
+		await _deal_next_round()
 
 	if player.hand.card_count == 0 and cpu.hand.card_count == 0 and deck.deck_card_pile.is_empty():
 		_end_round()

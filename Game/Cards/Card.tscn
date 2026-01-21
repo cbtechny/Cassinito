@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvee27coa3uc3"]
+[gd_scene load_steps=7 format=3 uid="uid://dvee27coa3uc3"]
 
+[ext_resource type="Script" path="res://Game/Cards/Card.gd" id="1_card_script"]
 [ext_resource type="Texture2D" uid="uid://1mbv6ap5hy66" path="res://Game/Cards/Textures/sample_card_texture.tres" id="1_nugkl"]
 [ext_resource type="PackedScene" uid="uid://j0232bin8qce" path="res://Game/Cards/back_card_sprite.tscn" id="2_bemvl"]
 
@@ -47,6 +48,7 @@ anchors_preset = 0
 pivot_offset = Vector2(0, 81)
 size_flags_horizontal = 4
 size_flags_vertical = 8
+script = ExtResource("1_card_script")
 metadata/_edit_use_anchors_ = true
 
 [node name="txtr_container" type="Node2D" parent="."]
