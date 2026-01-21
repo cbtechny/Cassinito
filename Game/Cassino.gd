@@ -57,6 +57,12 @@ func _init_game() -> void:
 	state = TurnState.PLAYER_TURN
 	_refresh_all_ui()
 
+
+func _free_children(node: Node) -> void:
+	for i in range(node.get_child_count()):
+		node.get_child(i).queue_free()
+
+
 # --- Dealing ---
 
 func _deal_initial() -> void:
@@ -83,12 +89,9 @@ func _deal_cards_to_table(count : int) -> void:
 		_spawn_table_card(card_data)
 
 func _clear_all_visuals() -> void:
-	for c in player_hand_box.get_children():
-		c.queue_free()
-	for c in cpu_hand_box.get_children():
-		c.queue_free()
-	for c in table_box.get_children():
-		c.queue_free()
+	_free_children(player_hand_box)
+	_free_children(cpu_hand_box)
+	_free_children(table_box)
 	card_to_node.clear()
 	node_to_card.clear()
 
@@ -158,11 +161,29 @@ func _toggle_table_selection(card : CardData, node : Control) -> void:
 	_highlight_selection()
 
 func _highlight_selection() -> void:
-	for c in card_to_node:
-		var node = card_to_node[c]
-		var is_selected = (c == selected_hand_card) or (c in selected_table_cards)
-		if node.has_method("highlight"):
-			node.highlight(is_selected)
+	# Deselect all cards first
+	for card_data in card_to_node:
+		var node = card_to_node[card_data]
+		if node:
+			var overlay = node.get_node_or_null("SelectionOverlay")
+			if overlay:
+				overlay.visible = false
+
+	# Highlight the hand card
+	if selected_hand_card:
+		var hand_node = card_to_node.get(selected_hand_card)
+		if hand_node:
+			var overlay = hand_node.get_node_or_null("SelectionOverlay")
+			if overlay:
+				overlay.visible = true
+
+	# Highlight table cards
+	for table_card in selected_table_cards:
+		var table_node = card_to_node.get(table_card)
+		if table_node:
+			var overlay = table_node.get_node_or_null("SelectionOverlay")
+			if overlay:
+				overlay.visible = true
 
 # Called from a "Play" button in the UI or double‑click, etc.
 func _on_confirm_move_pressed() -> void:
